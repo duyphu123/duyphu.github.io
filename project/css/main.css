@@ -270,6 +270,19 @@ ul {
   background-color: #c00a2d;
 }
 @media (max-width: 576px) {
+  .logo img{
+    min-height: 70px;
+    min-width: 70px;
+    
+  }
+  .cart img{
+    min-height: 30px;
+    min-width: 30px;
+  }
+  .user-icon img{
+    min-height: 30px;
+    min-width: 30px;
+  }
   .register form {
     flex-direction: column;
   }
@@ -436,7 +449,8 @@ ul {
   height: 10rem;
   width: 10rem;
 
-  background: url(../images/logo.png);
+  background: url(../images/logo3.jpg);
+  border-radius: 50%;
   background-size: cover;
   margin: 0 auto;
 }
@@ -492,6 +506,7 @@ header a {
 .logo img {
   margin: 0px;
   object-fit: cover;
+  height: auto;
 }
 .nav-list {
   display: flex;

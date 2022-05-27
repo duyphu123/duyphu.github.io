@@ -106,9 +106,7 @@ const renderProduct = (arr) => {
       )} </span> đ</div>
     </div>
     <div class="col3">
-    <div class="quantity" onchange="changeTotalProduct(${
-      t.id
-    }, event)">
+    <div class="quantity" onchange="changeTotalProduct(${t.id}, event)">
     <input class="input1"
     style="width: 40px; outline: none"
     type="number"
@@ -128,10 +126,7 @@ const renderProduct = (arr) => {
     </div>
   </div>`;
   }
-  let subTotalAll = 0;
-  for (let i = 0; i < arr.length; i++) {
-    subTotalAll += products[i].total * products[i].price;
-  }
+
   const btnSize = document.querySelectorAll(".btn");
   const sizeS = document.querySelectorAll(".sizeS");
   const sizeM = document.querySelectorAll(".sizeM");
@@ -143,7 +138,7 @@ const renderProduct = (arr) => {
       dropEL1[i].classList.toggle("show");
     });
   }
-  
+
   for (let i = 0; i < arr.length; i++) {
     const t = arr[i];
 
@@ -151,57 +146,18 @@ const renderProduct = (arr) => {
       dropEL1[i].classList.remove("show");
       priceSize[i].innerHTML = `${numberFormater.format(t.price)}`;
       btnSize[i].innerHTML = `Size S`;
-      let subTotal = products[i].total * priceSize[i].innerHTML*1000;
+      let subTotal = products[i].total * priceSize[i].innerHTML * 1000;
       summaryUlElement[i].innerHTML = "";
-    summaryUlElement[i].innerHTML += `${numberFormater.format(subTotal)}`;
-    
-    });
-  }
-  for (let i = 0; i < arr.length; i++) {
-    const t = arr[i];
-
-    sizeM[i].addEventListener("click", function () {
-      dropEL1[i].classList.remove("show");
-      priceSize[i].innerHTML = `${numberFormater.format(t.price + 20000)}`;
-      btnSize[i].innerHTML = `Size M`;
-      let subTotal = products[i].total * priceSize[i].innerHTML*1000;
-      summaryUlElement[i].innerHTML = "";
-    summaryUlElement[i].innerHTML += `${numberFormater.format(subTotal)}`;
-
-    
-    });
-  }
-  for (let i = 0; i < arr.length; i++) {
-    const t = arr[i];
-
-    sizeL[i].addEventListener("click", function () {
-      dropEL1[i].classList.remove("show");
-      priceSize[i].innerHTML = `${numberFormater.format(t.price + 40000)}`;
-      btnSize[i].innerHTML = `Size L`;
-      let subTotal = products[i].total * priceSize[i].innerHTML*1000;
-      summaryUlElement[i].innerHTML = "";
-    summaryUlElement[i].innerHTML += `${numberFormater.format(subTotal)}`;
-   
-    
-    });
-  }
-  const summaryUlElement = document.querySelectorAll(".tong span");
-  const summaryUlElement2 = document.querySelector(".col-right2");
-  const summaryUlElement3 = document.querySelector(".tong span");
-  console.log(summaryUlElement2);
-
-  console.log(summaryUlElement);
-
-  for (let i = 0; i < arr.length; i++) {
-    const t = arr[i];
-
-    let subTotal = products[i].total * products[i].price;
-    console.log(subTotal);
-    summaryUlElement[i].innerHTML += `${numberFormater.format(subTotal)}`;
-  }
- 
-  summaryUlElement2.innerHTML = "";
-  summaryUlElement2.innerHTML += `
+      summaryUlElement[i].innerHTML += `${numberFormater.format(subTotal)}`;
+      const summaryUlElement2 = document.querySelector(".col-right2");
+      let subTotalAll = 0;
+      for (let i = 0; i < arr.length; i++) {
+        const priceA = document.querySelectorAll(".gia-thanhtoan span");
+        console.log(priceA);
+        subTotalAll += products[i].total * (priceA[i].innerHTML * 1000);
+      }
+      summaryUlElement2.innerHTML = "";
+      summaryUlElement2.innerHTML += `
   <div class="row1 d-flex">
                   <p class="text-row2">${numberFormater.format(
                     subTotalAll
@@ -216,24 +172,130 @@ const renderProduct = (arr) => {
                   )}</p>đ
                 </div>
   `;
+    });
+  }
+  for (let i = 0; i < arr.length; i++) {
+    const t = arr[i];
+
+    sizeM[i].addEventListener("click", function () {
+      dropEL1[i].classList.remove("show");
+      priceSize[i].innerHTML = `${numberFormater.format(t.price + 20000)}`;
+      btnSize[i].innerHTML = `Size M`;
+      let subTotal = products[i].total * priceSize[i].innerHTML * 1000;
+      summaryUlElement[i].innerHTML = "";
+      summaryUlElement[i].innerHTML += `${numberFormater.format(subTotal)}`;
+      const summaryUlElement2 = document.querySelector(".col-right2");
+      let subTotalAll = 0;
+    for (let i = 0; i < arr.length; i++) {
+      const priceA=document.querySelectorAll(".gia-thanhtoan span")
+      console.log(priceA)
+      subTotalAll += products[i].total * (priceA[i].innerHTML*1000);
+    }
+    summaryUlElement2.innerHTML = "";
+    summaryUlElement2.innerHTML += `
+    <div class="row1 d-flex">
+                    <p class="text-row2">${numberFormater.format(
+                      subTotalAll
+                    )}</p>đ
+                  </div>
+                  <div class="row1 d-flex">
+                    <p class="text-row2">0</p>đ
+                  </div>
+                  <div class="row1 d-flex">
+                    <p class="text-row2 tongcong">${numberFormater.format(
+                      subTotalAll
+                    )}</p>đ
+                  </div>
+    `;
+    });
  
+  }
+  for (let i = 0; i < arr.length; i++) {
+    const t = arr[i];
+
+    sizeL[i].addEventListener("click", function () {
+      dropEL1[i].classList.remove("show");
+      priceSize[i].innerHTML = `${numberFormater.format(t.price + 40000)}`;
+      btnSize[i].innerHTML = `Size L`;
+      let subTotal = products[i].total * priceSize[i].innerHTML * 1000;
+      summaryUlElement[i].innerHTML = "";
+      summaryUlElement[i].innerHTML += `${numberFormater.format(subTotal)}`;
+      const summaryUlElement2 = document.querySelector(".col-right2");
+    let subTotalAll = 0;
+    for (let i = 0; i < arr.length; i++) {
+      const priceA = document.querySelectorAll(".gia-thanhtoan span");
+      console.log(priceA);
+      subTotalAll += products[i].total * (priceA[i].innerHTML * 1000);
+    }
+    summaryUlElement2.innerHTML = "";
+    summaryUlElement2.innerHTML += `
+  <div class="row1 d-flex">
+                  <p class="text-row2">${numberFormater.format(
+                    subTotalAll
+                  )}</p>đ
+                </div>
+                <div class="row1 d-flex">
+                  <p class="text-row2">0</p>đ
+                </div>
+                <div class="row1 d-flex">
+                  <p class="text-row2 tongcong">${numberFormater.format(
+                    subTotalAll
+                  )}</p>đ
+                </div>
+  `;
+    });
+    
+  }
+  const summaryUlElement = document.querySelectorAll(".tong span");
+
+  console.log(summaryUlElement);
+
+  for (let i = 0; i < arr.length; i++) {
+    const t = arr[i];
+
+    let subTotal = products[i].total * products[i].price;
+    console.log(subTotal);
+    summaryUlElement[i].innerHTML += `${numberFormater.format(subTotal)}`;
+  }
+  const summaryUlElement2 = document.querySelector(".col-right2");
+  let subTotalAll = 0;
+for (let i = 0; i < arr.length; i++) {
+  const priceA=document.querySelectorAll(".gia-thanhtoan span")
+  console.log(priceA)
+  subTotalAll += products[i].total * (priceA[i].innerHTML*1000);
+}
+summaryUlElement2.innerHTML = "";
+summaryUlElement2.innerHTML += `
+<div class="row1 d-flex">
+                <p class="text-row2">${numberFormater.format(
+                  subTotalAll
+                )}</p>đ
+              </div>
+              <div class="row1 d-flex">
+                <p class="text-row2">0</p>đ
+              </div>
+              <div class="row1 d-flex">
+                <p class="text-row2 tongcong">${numberFormater.format(
+                  subTotalAll
+                )}</p>đ
+              </div>
+`;
 };
-const changeSize= (arr) => {}
+const changeSize = (arr) => {};
 // Thay đổi số lượng của item
 const changeTotalProduct = (id, event) => {
   // Lấy giá trị trong ô input dựa vào biến event trong hàm xử lý sự kiện
   let inputQuantityValue = parseInt(event.target.value);
-  console.log(inputQuantityValue)
+  console.log(inputQuantityValue);
   // Duyệt mảng products để tìm sản phẩm thay đổi
   for (let i = 0; i < products.length; i++) {
-      if (products[i].id == id) {
-          products[i].total = inputQuantityValue;
-      }
+    if (products[i].id == id) {
+      products[i].total = inputQuantityValue;
+    }
   }
   // Render lại giao diện sau khi xóa
-  renderProduct(products)
-}
-
+  renderProduct(products);
+};
 
 const deleteProduct = (id) => {
   for (let i = 0; i < products.length; i++) {
@@ -392,16 +454,16 @@ confirm1.addEventListener("click", async function () {
       return;
     }
   } catch (err) {}
-  confirm1.addEventListener("click", function () {
-    infoTt.style.display = "none";
 
-    btnDathang2.innerHTML = "Thay Đổi Thông Tin";
-    alert("Bạn Đã Đặt Hàng Thành Công.Xin Cảm Ơn");
-    overlayOpen.style.display = "none";
-    closeDialog();
-  });
 });
+confirm1.addEventListener("click", function () {
+  infoTt.style.display = "none";
 
+  btnDathang2.innerHTML = "Thay Đổi Thông Tin";
+  alert("Bạn Đã Đặt Hàng Thành Công.Xin Cảm Ơn");
+  overlayOpen.style.display = "none";
+  closeDialog();
+});
 // var cartProduct = document.querySelectorAll(".cart-item-thanhtoan");
 // var btnDelete = document.querySelectorAll(".fa-trash-can");
 // for (i = 0; i < cartProduct.length; i++) {
@@ -438,7 +500,7 @@ overlayOpen.addEventListener("click", function () {
 const showDialog = () => {
   document.getElementById("dialog").classList.add("show");
   const scrollY = document.documentElement.style.getPropertyValue("--scroll-y");
-  const body = document.body;
+  const body = document.body1;
   body.style.position = "fixed";
   body.style.top = `-${scrollY}`;
 };
